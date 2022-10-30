@@ -1,0 +1,257 @@
+PARTIAL DIFFERENTIAL EQUATIONS
+
+One of the main goals of the theory of PDEs is to express the unknown function of several
+independent variables from an identity where this function appears together with its partial
+derivatives. Mostly, t denotes the time variable, x,y,z,... stand for the spatial(dimensional)
+
+variables.
+
+The general PDE for an unknown function u = u(x, y, Z,t) can be written as
+F(x, y, Z, t, U, Uy, Uy, Uz, Ut, Uxx, Uxy) Uyz, Uyts ) = 0
+
+where (x,y,z) €0 C R®,t € 1, Nis a given domain in R? and/ C Risa time interval.
+
+Problems from mathematics and physics
+Differential equations describe many different physical systems, ranging form gravitation to
+fluid mechanics. They are difficult to study, they usually have individual equation, which needs
+to be analyzed as a separate problem.
+A fundamental question for any PDE is the existence and uniqueness of a solution for
+given boundary conditions. For nonlinear equations these questions are in general hard to
+
+answer.
+Heat equation
+
+Qt)
+
+0 L ad
+FIGURE 12.3.1 Temperatures in
+a rod of length Z
+
+The equation describing the heat equation problem is
+
+k~4= k>0
+
+e xis a point along the rod
+e tistime;
+e kis aphysical constant related to the material;
+
+e u(x,t) represents temperature at any point at any time.
+
+So here is the equation describing the problem and the problem is defined also by its boundary
+and initial values or conditions. For example
+e temperature ata point is fixed (mostly at the beginning/end of the rod)
+
+e distribution of temperature in the body at time t = 0 is given;
+
+, i ,)
+e flow at boundary is not allowed (the end is insulated): = = 0.
+x=L
+
+Laplace's equation
+
+Temperature as a
+function of position Thermometer
+on the hot plate
+
+FIGURE 12.2.3 Steady-state
+
+temperatures in a rectangular plate
+Laplace's equation is useful for solving many physical problems such as electrostatic,
+gravitational or velocity in fluid mechanics.
+
+d7u- d*u
+
+ax2 | By?”
+
+u(x, y) of temperature distribution at any point (x,y) according to boundary conditions.
+
+Partial differential equations can be classified from various points of view.
+
+e If time t is one of the independent variables of the function, then we can speak about
+evolution equations.
+e lf it is not the case (the equation contains only spatial independent variables), we can
+speak about stationary equations.
+“* The highest order of the derivative of the unknown function in the equation determines
+the order of the equation.
+
+e If the order is 1, then it is first order, other-wise it is high order PDEs.
+
+¢¢ If all the coefficients of u are constants, then it will be PDE with constant coefficients;
+
+0)
+
+otherwise it will be PDE with variable coefficients.
+> If the equation consists only of a linear combination of u and its derivatives (for
+example, it does not contain products as uu, , U,Uy,y, etc ...), then it is called a linear
+
+equation. Otherwise, it is a nonlinear equation.
+A linear equation can be written symbolically by means of a linear differential operator L ,
+i.e., the operator with the property
+L(au + Bv) = aL(u) + BL(v)
+
+where a, f are real constants and u, v are real functions.
+
+> The equation
+
+L(u) = 0
+is called homogeneous ,
+> the equation
+
+L(u) = f
+
+where f is a given function, is called nonhomogeneous . The function f represents the “right
+hand side” of the equation.
+Examples: Classify the following equations.
+
+1. The transport equation in one spatial variable
+
+Uz tu, = 0
+
+2. The Laplace equation in three spatial variables
+
+Uxy + Uyy + Uzgz = 0
+
+3. The Poisson equation in two spatial variables
+
+Uxy +Uyy = f » f=fuy)
+
+4. The wave equation with interaction in one spatial variable
+
+Uit — Uxx tu? = 0
+
+The interaction is represented by the term wu? .
+5. The diffusion equation in one spatial variable
+
+Up — Uxy = f
+
+6. The equation of the vibrating beam
+Ute + Uxxxx = 0
+
+7. The Schrdédinger equation
+Uz — lUyy = O
+
+8. The equation of a disperse wave
+Up — UUy + Uyyy = O
+SOLUTION of PDEs
+
+A function u is called a solution of a partial differential equation if, when substituted (together
+
+with its partial derivatives) into the equation, the latter becomes an identity.
+It means that the function u must have all derivatives appearing in the equation.
+
+If k is the order of the given partial differential equation, then by its solution we understand a
+function of the class C” satisfying the equation at each point. In such a case, we can speak
+about the classical solution of a PDE. If we solve, for example, the diffusion equation in one
+
+Spatial variable, that is,
+Uz = kuyy
+
+which is of the second order, then its classical solution will be a C*-function, i.e., a function
+
+having continuous partial derivatives up to the second order at all points (x, t) considered.
+
+Thus, we require the existence and continuity of derivatives u,, and u,, that do not occur in
+
+the equation at all.
+Example 1. Let us try to find a function u = u(x, y) satisfying the equation
+Uxx = 0
+
+This problem can be solved by direct integration of the equation
+
+We have obtained a solution for arbitrary functions f(y) and g(y). However, if we want to
+talk about the classical solution, the functions f(y) and g(y) must be twice continuously
+
+differentiable.
+Example 2. Let us find for a function u = u(x, y, Zz) satisfying the equation
+Uyy tu =0
+
+This equation is similar with the ODE for the unknown function v = v(t)
+
+when the general solution is a function
+
+with arbitrary constants. The solution of the PDE will be
+
+where f(x, z) and g(x,z) are arbitrary twice continuously differentiable functions.
+Example 3. Let us search for a function u = u(x, y) satisfying the equation
+Uxy = 0
+
+If we integrate with respect to y , we find
+
+When we integrate with respect to x, then
+
+where F’ = f.
+Consequently, the solution of any partial differential equation depends on arbitrary functions.
+Example 4. Let us look for a function u = u(x, y) satisfying the equation
+(Uxx)* + (Uyy)? = 0
+
+From the equation, we can write that
+
+Since the left-hand side is linear in x and the right-hand side is linear in y , we can say that
+ha fe» G1» Gz are linear functions. So,
+
+u(x,y) =axy+bx+cy+d
+
+where a, b, c,d are arbitrary real numbers. The solution depends on four arbitrary constants
+
+instead of two arbitrary function of one variable!
+AUXILIARY CONDITIONS (BOUNDARY AND INITIAL CONDITIONS)
+
+PDE does not provide sufficient information to enable us to determine its solution uniquely.
+
+For the unique determination of a solution, we need further information.
+
+Initial Conditions: Condition of the function to be solved for at a particular time.
+
+For example, for the function u(x, t)
+) Lage u(x, to) = f(x) or = = g(x) are initial conditions.
+t=Co
+
+2
+Ex. —=4— __, u(x,0)=x
+
+Here, highest derivative of u with respect to t is 1. So, we need 1 initial condition.
+
+Boundary Conditions: Condition of the function to be solved for at a particular special
+positions, generally on the edges of the domain where the PDE solves.
+
+We have three types of boundary conditions:
+
+> Dirichlet Boundary Condition
+Function u is specified at the boundary.
+Ex. If u(x,t), then u(0,t) = f,(t) is a Dirichlet boundary condition
+
+If u(x, y, t), then u(0, y, t) = fo(y,t) is a Dirichlet boundary condition
+
+> Neumann Boundary Condition
+Spatial derivative of the function u is specified at the boundary.
+Ex. If w(x, t), then u,(0, t) = g,(t) is a Neumann boundary condition
+
+If u(x, y, t), then w,(0, y, t) = g2(y,t) is a Neumann boundary condition
+
+s ~The number of initial conditions are the highest derivative of u with respect to t.
+
+10
+> Robin (Newton) Boundary Condition
+A linear combination of the derivative of the function and the function itself is specified at the
+boundary.
+
+Ex. If w(x, t), then u,(0, t) + ku(0,t) = h(t) is a Robin boundary condition
+
+*“* The needed boundary initial condition number is the sum of the orders of highest
+
+partial derivative in each spatial variable.
+Ex.
+Ure + Uxxxx = O
+
+For the solution, we need 2 initial and 4 boundary conditions.
+
+CONSTRUCT OF A PDE
+
+Let us consider the geometric surfaces of two parameters f (x, y, z,a, b) = 0 where a,b are
+arbitrary parameters.
+
+To determine the PDE, we have to take derivative of f with respect to x and y.
+
+11
+12
+13

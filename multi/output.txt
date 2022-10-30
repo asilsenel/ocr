@@ -1,0 +1,609 @@
+ECE4520/5520: Multivariable Control Systems I. 1-1
+
+Course Background
+
+1.1: From time to frequency domain
+
+= Loosely speaking, control is the process of getting “something” to do
+what you want it to do (or “not do,” as the case may be).
+
+e The “something” can be almost anything. Some examples: aircraft,
+spacecraft, cars, machines, robots, radars, etc.
+e Some less obvious examples: energy systems, the economy,
+biological systems, the human boay...
+=» The “something” is called the system that we would like to control.
+
+DEFINITION: Control is the process of causing a system variable to
+conform to some desired value, called a reference value (eé.g.,
+variable = temperature for a climate-control system).
+
+DEFINITION: Feedback is the process of measuring the controlled
+variable and using that information to influence its value.
+
+Disturbance
+
+oe
+sator
+
+= Feedback is not necessary for control. But, it is necessary to cater for
+system uncertainty, which is the principal role of feedback.
+
+Output
+
+= Open-loop control is also possible.
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background 1-2
+
+=» Goals of feedback control:
+
+e Change dynamic response
+of a system to have desired
+properties.
+
+e Output of system tracks
+reference input.
+
+e Reject disturbances.
+= Control design requires mathematical sets of equations (called a
+model) that describes the system being controlled.
+
+= Classical feedback techniques (cf., ECE4510) use frequency-domain
+(Laplace) models and tools to analyze and design control systems.
+
+e Involves moving the poles of the closed-loop transfer function.
+= Multivariable, state-space control instead:
+
+e Primarily uses time-domain matrix representations of systems.
+
+e Very powerful. Can often place poles of closed-loop system
+anywhere we want! Can make fast, smooth, etc.
+
+e Same methods work for single-input, single-output (SISO) or
+multi-input, multi-outout (MIMO) systems.
+
+e Advanced techniques (cf., ECE5530) allow design of optimal linear
+controllers with a single MATLAB command!
+= This course is a bridge between classical control and topics in
+advanced linear systems and control.
+
+= We now review some of the concepts of classical linear systems and
+control which we will use...
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background 1-3
+
+Dynamic response
+
+= Our primary objective is to be able to understand and learn how to
+control linear time-invariant (LTl) systems.
+
+e We will also soend some time investigating nonlinear and linear
+time-varying (LTV) systems.
+= LT| dynamics may be specified via models expressed as linear,
+constant-coefficient ordinary differential equations (_CCODE).
+
+=» Examples include:
+
+e Mechanical systems: Use Newton's laws.
+
+e Electrical systems: Use Kirchoft’s laws.
+
+e Electro-mechanical systems (generator/motor).
+e Thermodynamic systems.
+
+e Fluid-dynamic systems.
+
+EXAMPLE: Second-order system in “standard form”:
+FO) + Won y(t) + Oy) = @;u(0).
+
+dy(t d? y(t
+= u(t) is the input, y(t) is the output, y(t) S eA and y(t) S Eh )
+
+Laplace Transform
+= The Laplace transform is a tool to help analyze dynamic systems.
+Y(s) = H(s)U(s), where
+e Y(s) is Laplace transform of output, y(t);
+e U(s) is Laplace transform of input, u(t);
+e H(s) is transfer function—the Laplace tx of impulse response, /(f).
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background
+a £{y(t)} = sY(s) — y(O) in general, and L{y(t)} = sY(s) fora system
+initially at rest.
+
+EXAMPLE: Iransfer function for second-order system:
+
+s°Y(s) + 26@,sY(s) + w7Y(s) = w2U(s)
+2
+
+Ww
+Y(s) = —————_U(s).
+5) s* + 26@,5 + w? 5)
+
+= Transforms for systems with LCCODE representations can be written
+as Y(s) = H(s)U(s), where
+bos™ + bys™! + ee) + Dis + bin
+
+where n > m for physical systems.
+
+H(s)
+
+=» These can be represented in MATLAB using vectors of numerator
+and denominator polynomials:
+
+num=[b0O bl ... bm];
+den=[a0 al... an];
+
+Ssys=tf (num, den) ;
+
+= Can also represent these systems by factoring the polynomials into
+zero-pole-gain form:
+
+H(s) = Kia = 2)
+[],-:@ — pi)
+Ssys=zpk(z,p,k); %& in MATLAB
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background
+
+= Input signals of interest include the following:
+
+u(t)
+u(t)
+u(t)
+
+u(t)
+u(t)
+u(t)
+u(t)
+u(t)
+
+k o(t)
+k 1(t)
+kt 1(t)
+
+k exp(—at) 1(t)
+k sin(wt) 1(t)
+k cos(wt) 1(t)
+
+ke~ sin(wt) 1(t)
+
+= ke cos(at) I(t) ...
+
+. U(s)
+. U(s)
+. U(s)
+
+. U(s)
+. U(s)
+. U(s)
+
+. U(s)
+
+U(s)
+
+k
+
+k/s
+
+k/s?
+k
+
+S+a
+k@
+
+ks
+
+(s+a)*+ ow?
+
+k(s + a)
+
+(s+a)*+o?
+
+impulse
+step
+ramp
+
+exponential
+sinusoid
+cosinusoid
+decaying sinusoid
+
+decaying cosinusoid
+
+=» MATLAB's “impulse, “step, and “lsim’ commands can be used to
+find output time histories.
+
+= The final value theorem states that if a system is stable and has a
+final, constant value, then
+
+jim x(t) = lim sX(s).
+
+= Useful when investigating steady-state errors in a control system.
+
+= The initial value theorem states that the initial value of a signal may
+be found using
+
+x(O-) = x(0T), x(t) continuous at ¢ = 0:
+
+lim sX(s) =
+
+x(0T),
+
+otherwise.
+
+= We will see a use for this later in the semester when studying system
+controllability.
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background 1—6
+
+1.2: From frequency to time domain
+= The inverse Laplace transform (ILT) converts X(s) — x(t).
+
+= Here we assume that X(s) is a ratio of polynomials in s. That is,
+
+= lf X(s) is not a proper rational function, we must first perform long
+division. (In a proper rational function, the degree of C(s) is less than
+the degree of A(s).)
+
+= In general, partial-fraction inversion begins by writing
+B
+X(s) = K(s) + Bs) = K(s) + F(s),
+A(s)
+
+where K(s) is of the form
+K(s) = ko + kis i krps”.
+
+= We inverse transform K(s) using
+d’d(t
+©) <> 5".
+dt”
+=» The remaining problem is to find the inverse transform of F(s).
+_ bos™ + bys™ |! + +++ + din
+
+Fi(s
+(s) s?’ ta sr-l+..-+ta,
+_ [Tins = zi) _— _—*(Zeros)
+[ Lj. 65 — pi) (poles)
+r r . —
+—~ iy Py if {p;} distinct.
+S—DPD, S— p2 sS —
+ro(s — ry,(s —
+SO, (s— pi) F(s) = 7, + OST PD eg = PD
+S — p2 S— Pn
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background 1—/
+
+= Lets = p,. Then,
+
+ry = (s— pi) F(S) |=, = Similarly,
+
+rj = (s— Di) F(S)|s— p,
+
+and
+
+f(t) = SY rie? 1(t) since L le*'1(t) | = —,
+
+: —k
+i=1
+EXAMPLE: F(s) ° °
+. SQ) SS Ds
+s?+3s4+2 (s+1)(s +2)
+P)
+n=+DFO| = 5)4>
+P)
+rn = (s+ 2)F(s)| ~ s+ 1ls=-2 =79
+
+f(t) = (Se —5e-*)1(f).
+
+Repeated poles
+= lf F(s) has repeated roots, we must modify the procedure. e.g., for a
+pole repeated 3 times:
+
+F(s) = K
+
+(s — pi)°(s — po) >>:
+Pi r} 2 3 i)
+= + ese
+s—pi (s—pi)? (s—pi)i s—po
+ri3 = (s— pi) F(s)|
+
+S=p|
+d
+
+ri2= Fe ((s — pi)’ F(s))
+
+s=p|
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background 1-8
+
+17 dd
+ni = 5 Fe ((s — pi)’ F(s))
+
+S=P]
+ly k-i = Fe ((s — pi)‘ F(s))
+s+3
+(s + 1)(s + 2)2
+mans: f(t) = (2e' —2e7 — te )1(¢).
+from repeated root.
+
+S=Pj
+
+EXAMPLE: Find ILI of
+
+a» JEDIOUS.
+=» Use MATLAB. e.g., F(s) = a
+s-+ 3s +2
+Example 1. Example 2.
+>> Fnum=[0 0 5]; >> Fnum=[0 0 1 3];
+>> Fden=[1 3 2]; >> Fden=conv([1 1],conv([1 2],[1 2]));
+>> [r,p,k]=residue (Fnum, Fden) ; >> [r,p,k]=residue (Fnum, Fden) ;
+r= -5 r= -2
+5 -1
+p= -2 2
+-1 p= -2
+k = [] —2
+-1
+k = []
+
+= When you use “residue” and get repeated roots, BE SURE to type
+“help residue” to correctly interpret the result.
+
+Complex-conjugate poles
+= The theory developed thus far works for either real or complex poles.
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background 1-9
+= It may be easier to handle complex-conjugate poles separately.
+
+= Consider
+B(s)
+(s — pis — pH) Q(s)
+Ky K> R(s)
+— s—p, s—pt Qs)
+=» Expand R(s)/QO(s) using previous methods. Expand the first part as
+K, K> as +b
+S—pi s—p; ~ (s —0\)? + w?
+= It can be shown that a = 2R(K,), b = —2[R(K,)o; + 1(K))q@)],
+0; = R(pi), and a = I(p1).
+
+F(s) =
+
+EXAMPLE: As a specific problem consider
+25° +65 +6
+~ (s + 2)(s* + 28 + 2)
+r| as + b
+~5d2 WHIP
+
+X (Ss)
+
+= Using the simple-pole formula we find
+2s* + 6s + 6 8—12+6
+n= —————_ —
+9249942], 4-442
+= We will substitute values for s to obtain a and b.
+
+aLets = 0.
+ei 2 pa?
+2:2 2 2 oT
+
+maLets = l.
+2+6+6 Pate ;
+$$ = — 4 a= l.
+3(1 + 2+ 2) 3 5
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background 1-10
+
+= Finally,
+
+] s+2
+X(s) = + ——________
+5) s+2 (s4+1)*+1
+] s+] l
+
+a ae os
+s+t2 (s+1)*?4+1 (s+1)?+1
+
+= Taking the inverse-Laplace transform
+
+x(t) = [e +e‘ cos(t) + e sin(t)] 1(0).
+
+Symbolic Laplace transforms using MATLAB
+= MATLAB incorporates part of the Maple symbolic toolbox.
+
+=» The commands of interest to us here are: Laplace, ilaplace,
+ezplot and pretty.
+e F=laplace(f) Is the Laplace transform of symbolic fn ‘f.
+e f=ilaplace(F) Is the inverse-Laplace transform of ‘F.
+eezplot(f, [xmin xmax]) plots symbolic function ‘T
+e pretty (S) displays symbolic ‘S’ in a “pretty” way.
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background
+1.3: Dynamic properties of LT] systems
+
+Block diagrams
+
+= Useful when analyzing systems comprised of a number of sub-units.
+
+U(s) Y(s) Y(s) = H(s)U(s)
+
+U(s) Y(s)—-¥(s) = [Hi (s) Ha(s)] U(s)
+
+Y(s) = [Ai(s) + A(s)] Us)
+
+_ F1,(s)
+"S) = Ts) is)
+
+Dynamic response versus pole locations
+
+= The poles of H(s) determine (qualitatively) the dynamic response of
+the system. The zeros of H(s) quantify the relationship.
+
+= lf the system has only real poles, each one is of the form:
+
+A(s) = sto
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background 1-12
+= Ifo > 0, the system is stable, and h(t) = e~-°’1(t). The time constant
+is t = 1/o, and the response of the system to an impulse or step
+decays to steady-state in about 4 or 5 time constants.
+
+impulse([0O 1],[1 1]); step([0 1],[1 1]);
+
+K(1—e 7!)
+System response. K = dc gain
+
+2 3
+Time (sec x T) ‘ Time (sec x tT)
+
+= If asystem has complex-conjugate poles, each may be written as:
+
+a)
+
+A(s) = ————_...
+) s* + 2C@,8 + w?
+
+= We can extract two more parameters from this equation:
+
+o=lw, and wy =a,V1-—C?.
+
+6 = sin '(C)
+
+l(s)
+
+=o plays the same role as above—it specifies
+decay rate of the response.
+
+= w, IS the oscillation frequency of the output.
+Note: mw; # w, unless ¢ = 0.
+
+=» ¢ is the “damping ratio” and it also plays a
+role in decay rate and overshoot.
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background
+
+1-13
+= Impulse response h(t) = w,e~' sin(wgt) I(t).
+
+= Step response y(t) = 1—e”' (costou) + — sin(out)),
+d
+
+Impulse Responses of 2nd-Order Systems Step Responses of 2nd-Order Systems
+
+y(t)
+
+y(t)
+
+=» Asummary chart of impulse responses and step responses versus
+pole locations is:
+
+Ss)
+
+ZN
+
+4
+\
+
+IR(s)
+
+Impulse responses vs. pole locations
+
+Step responses vs. pole locations
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background 1-14
+
+= Time-domain specs. determine
+where poles should be placed
+in the s-plane.
+
+= Step-response specs often
+given.
+
+= Rise time z, = time to go from
+10 % to 90 % of final value.
+
+® Setiling time ¢, = time until
+permanently within ~ 1 % of final
+value.
+
+= Overshoot M, = maximum
+percent overshoot.
+
+Is) Ics) (s) Is)
+
+<— O—
+
+| Ris) | Ris) | Rs) | Ris)
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background 1-15
+Basic feedback properties
+
+r(t) +e D(s) G(s) y(t) YG) D(s)Gs)  _
+
+= Stability depends on roots of denominator of 7 (s): 1 + D(s)G(s) = 0.
+
+= Routh test used to determine stability.
+
+= Steady-state error found from E(s) = (1 — T(s)) R(s).
+
+Be. = jim e(t) = lim sE(s) if the limit exists.
+e System type = 0 iff e,, is finite for unit-step reference-input 1(f).
+e System type = 1 iff e,, is finite for unit-ramp reference-input r(f).
+e System type = 2 iff e,, is finite for unit-parabola ref.-input p(t)...
+
+Some types of controllers
+
+“Proportional” ctrir: u(t) = Ke(t). D(s) = K.
+
+K f' K
+“Integral” ctrlr u(t) = ~| e(t) dt. D(s) = —
+
+T7 00 17s
+“Derivative” ctrlr. u(t) = KTpe(t) D(s) = KTps
+
+|
+Combinations: Pl: Dis) = K (1 + 7)
+Ty7s
+
+PD: D(s) = K (1 + Tops):
+i
+PID:D(s) = K (1 +—+ Tos |
+T7s
+
+often, K =a)
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett
+ECE4520/5520, Course Background 1-16
+(T\s + 1)(T)s + 1)
+
+$$ _———————.. a, < l,a@>l.
+(aTis + 1)(xIs +1) | °
+
+Lead/Lag: D(s)=K
+
+= Integral can reduce/eliminate steady-state error.
+= Derivatives can reduce/eliminate oscillation.
+= Proportional term can speed/slow response.
+
+= Lead control approximates derivative control, but reduces
+amplification of noise.
+
+=» Lag control approximates integral control, but is easier to stabilize.
+
+Where to from here?
+
+= We have reviewed some important concepts from classical control
+theory, which uses a transfer-function approach.
+
+= We now begin to examine state-space models.
+
+Lecture notes prepared by Dr. Gregory L. Plett. Copyright © 2015, 2011, 2009, 2007, 2005, 2003, 2001, 2000, Gregory L. Plett

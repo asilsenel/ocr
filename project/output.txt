@@ -1,0 +1,302 @@
+Department of Mechanical Engineering
+
+Massachusetts Institute of Technology
+2.010 Modeling, Dynamics and Control III
+Spring 2002
+
+SOLUTIONS: Problem Set # 10
+
+Problem 1
+
+Estimating transfer function from Bode Plot.
+
+This is something that is very useful when working with experimental data. It comes with
+practice. If you see how to do it immediately, great, if not here are some tips on how to do it a
+little bit more methodological. It’s long but hopefully worthwhile.
+
+How to obtain a transfer function from the graph
+(Melissa’s Way, not necessarily the best way)
+
+Step 1: Relative order of system
+
+Look at Phase diagram. The final value will tell you the relative order of the system.
+
+Think about it. Each pole at high frequencies will contribute —90° to the phase, while each zero
+will contribute +90°. (Complex poles/zeros are made of 2 poles/zeros so they contribute —/+
+180°) You can also do this by looking at the final slope of the magnitude response, but I think it
+is clearer to look at the phase response.
+
+Now for this problem we see that the phase diagram ends at —180°. This tells you that there are 2
+more poles than zeros in the transfer function.
+
+20 log M
+
+im
+
+Phase (degrees)
+
+Frequency (rad/s)
+Step 2: Number of Poles and zeros
+
+Now we need to decide how many poles and zeros there are in the system. Looking at the
+magnitude diagram we can see that the initial slope is -20 dB/dec, and the final slope is —40
+dB/dec. Since we never see a decrease in slope 1.e. from —40 dB/dec to —20 dB/dec, we can
+assume that there are no zeros.
+
+So we know we have two poles and no zeros.
+
+Step 3: Location of Poles and zeros
+Since the magnitude plot starts at a slope of -20 dB/dec we know that this is a type 1 system, so
+we have a pole at 0. We can also see this from the phase diagram since it start at —90°.
+
+Now we can figure out where the second pole is. By extending the asymptotic lines at the
+beginning and end of the diagram we can see that they meet at about 5 rad/s. Therefore this is
+the break frequency of second pole.
+
+Now we know our transfer function looks like:
+
+G(s) = K
+
+{2 +1]
+
+The last thing we need to do is find the gain that gives us this response
+
+Step 4: Finding the Gain
+
+Since this is a Type | system, the gain will not simply be the point were it crosses as it would for
+a Type 0 system. Instead we can figure out the gain by knowing that the pole at 0 would be at
++40 dB if there were no gain. Instead we can see that it is more at about 68 dB. Therefore the
+DC gain must have contributed this additional 28 dB. The gain is then :
+
+20log K =28dB=> K =25
+
+Step 5: MATLAB Check
+To verify that this is the correct we can plot it into MATLAB.
+
+Bode Diagram
+TTT T T T T TT TTT T T T TTT TTT
+
+ee pornos ens System: sys toro
+40 L-----4----t--t sate ee ee ee Frequency (rad/sec): 1.64 0) ot
+: > ot pp eeeee , ; re _§ Magnitude (dB): 23.2 ‘ Sof bh has
+
+Magnitude (dB)
+|
+
+Phase (deg)
+
+Frequency (rad/sec)
+
+Indeed the response is very close to our original function.
+Part b) — same method
+
+Step 1: Relative order of system
+
+Here we see that the phase plot starts at 0° and drops down to about —90°, which implies a
+relative order of 1. Notice that even though the phase goes up to about 50 °, what we care about
+
+is the final value for high frequencies.
+
+PC TTI CEN 1 II
+Pee Neal TTT
+a Oo
+
+SPH Nee
+aa COINS
+
+20 log M
+
+Phase (degrees)
+
+10 100
+Frequency (rad/s)
+
+Step 2: Number of Poles and zeros
+
+Now we know that we have one more pole than zero, but we don’t know how many or where
+
+they are. We need to carefully analyze this system. Again we look at the slopes of the response.
+
+Initially the slope is 0, so we know we have a Type 0 system. Then the response goes up, at a
+
+slope of +20 dB/dec; so there must be a zero around | rad/s. Around 10 rad/s the response drops
+
+and goes down at a slope of about —-40 dB/dec. Which means that there must have been a
+
+contribution of 3 poles. One to offset the zero, and 2 more bring the slope down to -40. Then
+
+around 20 rad/s we see another change in slope from —40 dB/dec to —20 dB/dec, which must be
+
+due to another zero.
+
+Therefore we can safely say that we have 3 poles and 2 zeros, with a relative order of 1 as
+
+expected.
+
+Step 3: Location of Poles and zeros
+
+By drawing the asymptotes as shown in the figure we can estimate the break frequency for the
+first zero at 1 rad/s. We see though that the response increases beyond the expected slope of the
+asymptote. The only other thing that would cause the response to rise other than a zero is a
+second order pole with ¢ < 0.707. So then we know that around a frequency of 10 rad/s we have
+a complex double pole. In addition around this area we have an additional simple pole, since the
+slope between 10 — 20 rad/s is -40 dB/dec. This pole probably lies somewhere between 6 to 20
+rad/s. Then the zero the that cause the reduction in slope lies around 25 rad/s. So our transfer
+function looks like:
+
+Where we still need to find K and ¢.
+Step 4: Finding the Gain
+
+The gain for this problem will be the y-intercept at low frequencies so:
+20log K =-10dB=> K = 0.32.
+
+Since the second order pole causes a slight increase in the response but doesn’t cause it to shoot
+up, we can estimate 0.4 < ¢ < 0.707, we will choose € = 0.6 and check whether this is viable.
+
+Finally we have
+0.32) > 41 2 41
+1 jas 12s +1)(9 +25)
+
+(+ sil(*) 42-04 8 }+1| ~ (s+10)(s? + 6s +100)
+10 10 “110
+
+Step 5: MATLAB Check
+
+G(s)=
+
+Bode Diagram
+
+Magnitude (dB3
+
+Phase (deqi
+
+Frequency (rad/secy
+
+Again, good correlation with our matlab results
+Problem 2
+You are asked to sketch the bode plot so it should be done by hand. When K = 800.
+
+800, +1
+K(s+0.5) | 0.5
+
+OAS) = 100s +2)" <00
+S
+
+40 dB
+
+20 dB
+
+Oo
+a
+om
+
+NL GM =30dB_
+WENDT Te
+
+Magnitude [dB]
+
+ho
+Oo
+a
+om
+
+1000
+
+Phase [Degrees]
+
+1000
+
+Frequency [o]
+The gain margin of 30 dB implies that the entire magnitude curve can be shifted up by 30 dB,
+which is the equivalent of lowering the 0 dB mark by 30 dB. Since we can shift the curve by up
+to 30 dB that means that the gain can increase from what it is now by a factor of up to:
+20log(gain) = 30 dB = gain = 31 times.
+
+Therefore our value of K can be:
+800 < K < 800-31 = 24800
+
+Problem 3
+
+This is a very simple problem as soon as you understand what you are looking at, and what you
+need to do.
+
+a)
+
+First lets remember how we obtain the gain margin, we find the point on the phase diagram
+where the phase is exactly 180° and then we find the magnitude at the same frequency and the
+distance from the OdB 1s the gain margin.
+
+In this problem we are not given a bode plot instead we are given the input/output curves —which
+is essentially how the bode plot is formed.
+
+Since we are given input/output curves when the phase is 180°, all we need to do 1s find the gain
+at this frequency, which is:
+
+output _ > op 2010e{ > ~_4.08 dB
+input 8 8
+
+Therefore the gain margin is: 4.08 dB
+
+b)
+
+Now we are asked to find the phase margin.
+
+With a bode plot we find the point where the response hits the 0 dB line and then find the phase
+at the same frequency. In figure (3d) we are given an input/output curve where the gain is |
+which is 0 dB. So, all we need to do is find out how much the sinusoid has been shifted.
+
+Arnplitude
+
+a,
+a
+
+20 3
+Time [rms]
+The distance shown is how much the output would need to shift to be at a phase of 180°, in other
+words this is our phase margin. By estimating this shift from the graph and converting it to
+degrees, we get that the shift margin is ®,, = 40°.
+
+Problem 4
+
+You should not need to do this by hand, just use matlab. Here are the commands you need:
+>> num = [22.5]
+
+>> den = conv ([{1 4].[1 0.9 9])
+
+>> bode (num,den)
+
+Bode Caagram
+
+Magnitude (dB)
+
+Phase (deg)
+
+Frequency (rad/sec)
+Though it is difficult to see using matlab we find that when the phase crosses 180° at m = 3.55
+rad/s the magnitude is —1.2 dB, so the phase margin is 1.2 dB.
+The magnitude will cross the 0 dB line twice the first time the phase about —50°, which we
+dismiss. The second time the phase is about —178°, so we say that the phase margin is 2°. This
+system is very close to instability.
+Problem 5
+This one specially you should use matlab
+
+>> num = 1.96*conv([{1 1 .25],[1 1.26 9.87])
+>> den = conv ([{1 .015 .57],[1 .083 17.2])
+>> bode (num,den)
+
+Bode Diagram
+
+Magnitude (dB)
+
+Phase (deg)
+
+Frequency (red/sec)
+If this is used as PID controller the frequencies reduced will be those of the peaks of the
+magnitude response. Namely o = 0.75 rad/s and w = 4.1 rad/s
+
+If you plot this by hand, you MUST calculate the M, , the peak of the magnitude, and o, the
+frequency at which they occur.
+
+b) These frequencies will be reduced because if the poles and zeros of the controller match the
+poles and zeros of the disturbance then there will be pole/zero cancellation and the dynamics of
+the disturbance will be reduced.
